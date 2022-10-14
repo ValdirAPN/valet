@@ -2,6 +2,7 @@ package br.com.vpn.valet.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,7 +17,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import br.com.vpn.valet.R
-import br.com.vpn.valet.ui.theme.Primary
+import br.com.vpn.valet.ui.AppBar
+import br.com.vpn.valet.ui.theme.Yellow
 
 @Composable
 fun Home(
@@ -42,7 +44,7 @@ fun HomeContent(
                 .fillMaxWidth()
                 .windowInsetsTopHeight(WindowInsets.statusBars)
         )
-        HomeAppBar(modifier = modifier)
+        AppBar(modifier = modifier, isOnPrimary = true)
         Column(
             modifier = modifier.fillMaxSize()
         ) {
@@ -58,26 +60,6 @@ fun HomeContent(
             Map(modifier)
         }
     }
-}
-
-@Composable
-fun HomeAppBar(
-    modifier: Modifier
-) {
-    TopAppBar(
-        title = {
-                Row {
-                    Image(
-                        painter = painterResource(id = R.drawable.valet_logo),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.background),
-                        contentDescription = null
-                    )
-                }
-        },
-        modifier = modifier.fillMaxWidth(),
-        backgroundColor = Color.Transparent,
-        elevation = 0.dp
-    )
 }
 
 @Composable
@@ -115,7 +97,7 @@ fun FindLocationTextField(
         ),
         trailingIcon = {
             Icon(
-                painterResource(id = R.drawable.magnifying_glass), null, tint = Primary)
+                painterResource(id = R.drawable.magnifying_glass), null, tint = Yellow)
         },
         modifier = modifier.fillMaxWidth(),
     )

@@ -7,6 +7,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import br.com.vpn.valet.ui.AppBar
 
 @Composable
 fun Parking(
@@ -22,6 +23,7 @@ fun Parking(
                     .fillMaxWidth()
                     .windowInsetsTopHeight(WindowInsets.statusBars)
             )
+            AppBar(modifier = modifier)
             Text(text = "Parking")
         }
     }
