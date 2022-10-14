@@ -51,7 +51,7 @@ fun HomeContent(
             Column(
                 modifier = modifier.padding(24.dp)
             ) {
-                Title(title = "Let's find a parking space", modifier = modifier)
+                Title(title = "Let's find a parking space", modifier = modifier, isOnPrimary = true)
                 FindLocationTextField(
                     modifier
                         .padding(top = 24.dp)
@@ -72,12 +72,13 @@ fun Map(modifier: Modifier) {
 @Composable
 fun Title(
     title: String,
-    modifier: Modifier
+    modifier: Modifier,
+    isOnPrimary: Boolean = false
 ) {
     Text(
         text = title,
         style = MaterialTheme.typography.h1,
-        color = MaterialTheme.colors.background,
+        color = if (isOnPrimary) MaterialTheme.colors.background else MaterialTheme.colors.primary,
         modifier = modifier.widthIn(100.dp, 300.dp)
     )
 }
