@@ -123,52 +123,6 @@ fun OutlinedDropdown(
     }
 }
 
-
-//@Composable
-//fun OutlinedDropdown(
-//    label: String,
-//    modifier: Modifier
-//) {
-//    var expanded by remember { mutableStateOf(false) }
-//    var selectedBrand by remember { mutableStateOf("") }
-//    val brands = listOf("Toyota", "Hyundai", "Honda", "Fiat")
-//    val icon = if (expanded)
-//        Icons.Filled.KeyboardArrowUp
-//    else
-//        Icons.Filled.KeyboardArrowDown
-//
-//    Column() {
-//        OutlinedTextField(
-//            value = selectedBrand,
-//            label = { Text(text = label) },
-//            onValueChange = { selectedBrand = it },
-//            shape = RoundedCornerShape(8.dp),
-//            trailingIcon = {
-//                Icon(
-//                    icon,
-//                    "Expand",
-//                    modifier = modifier.clickable { expanded = !expanded }
-//                )
-//            },
-//            modifier = modifier.fillMaxWidth()
-//        )
-//        DropdownMenu(
-//            expanded = expanded,
-//            onDismissRequest = { expanded = false },
-//            modifier = modifier.fillMaxWidth()
-//        ) {
-//            brands.forEach { brand ->
-//                DropdownMenuItem(onClick = {
-//                    expanded = false
-//                    selectedBrand = brand
-//                }) {
-//                    Text(text = brand)
-//                }
-//            }
-//        }
-//    }
-//}
-
 @Composable
 fun OutlinedTextField(
     label: String,

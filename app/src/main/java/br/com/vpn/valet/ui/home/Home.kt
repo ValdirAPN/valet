@@ -3,6 +3,7 @@ package br.com.vpn.valet.ui.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,8 +11,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.com.vpn.valet.R
 import br.com.vpn.valet.ui.components.AppBar
 import br.com.vpn.valet.ui.theme.Yellow
@@ -84,13 +88,16 @@ fun FindLocationTextField(
     modifier: Modifier
 ) {
     var userInput by rememberSaveable { mutableStateOf("") }
+
     TextField(
         value = userInput,
         onValueChange = { userInput = it },
         label = { Text(text = "Find a location") },
         shape = RoundedCornerShape(8.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.background
+            backgroundColor = MaterialTheme.colors.background,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent
         ),
         trailingIcon = {
             Icon(
