@@ -53,6 +53,6 @@ fun MenuItem(title: String, modifier: Modifier, isLast: Boolean = false) {
             modifier = modifier.padding(vertical = 16.dp),
             color = if (isLast) MaterialTheme.colors.error else MaterialTheme.colors.onBackground
         )
-        if (!isLast) Box(modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colors.secondaryVariant))
+        if (!isLast) Box(modifier.fillMaxWidth().height(0.4.dp).background(MaterialTheme.colors.secondaryVariant))
     }
 }

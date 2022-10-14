@@ -71,7 +71,7 @@ fun VehicleItem(vehicle: Vehicle, modifier: Modifier) {
         Box(
             modifier
                 .fillMaxWidth()
-                .height(1.dp)
+                .height(0.4.dp)
                 .background(MaterialTheme.colors.secondaryVariant)
         )
     }
