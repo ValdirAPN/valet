@@ -1,4 +1,4 @@
-package br.com.vpn.valet.ui
+package br.com.vpn.valet.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row

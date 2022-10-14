@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Button(text: String, modifier: Modifier) {
+fun Button(text: String, modifier: Modifier, onClick: () -> Unit) {
     androidx.compose.material.Button(
-        onClick = { /*TODO*/ },
+        onClick = { onClick() },
         modifier = modifier
             .height(48.dp)
             .fillMaxWidth(),

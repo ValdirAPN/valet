@@ -15,6 +15,7 @@ sealed class Screen(val route: String) {
     object Profile: Screen("profile")
     object Vehicles: Screen("vehicles")
     object ParkingLots: Screen("parking_lots")
+    object NewVehicle: Screen("new_vehicle")
 }
 
 sealed class BottomNavItem(var title: String, var icon: Int, var scren_route: String) {

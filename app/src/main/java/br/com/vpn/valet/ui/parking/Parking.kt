@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.vpn.valet.data.Vehicle
-import br.com.vpn.valet.ui.AppBar
+import br.com.vpn.valet.ui.components.AppBar
 import br.com.vpn.valet.ui.components.Button
 import br.com.vpn.valet.ui.home.Title
 
@@ -68,7 +68,7 @@ fun ActiveParkingItem(vehicle: Vehicle, modifier: Modifier) {
             }
             Text(text = "$24.99", style = MaterialTheme.typography.h2, color = MaterialTheme.colors.primary)
         }
-        Button(text = "Pay", modifier = modifier.padding(bottom = 16.dp))
+        Button(text = "Pay", modifier = modifier.padding(bottom = 16.dp)) { }
         Box(
             modifier
                 .fillMaxWidth()

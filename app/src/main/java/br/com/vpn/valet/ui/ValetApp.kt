@@ -10,12 +10,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navigation
 import br.com.vpn.valet.ui.home.Home
 import br.com.vpn.valet.ui.parking.Parking
 import br.com.vpn.valet.ui.profile.Profile
+import br.com.vpn.valet.ui.vehicles.NewVehicle
 import br.com.vpn.valet.ui.vehicles.Vehicles
 
 @Composable
@@ -25,11 +28,12 @@ fun ValetApp(
 ) {
 
     if (appState.isOnline) {
+        val navController = appState.navController
         Scaffold(
-            bottomBar = { BottomNav(navController = appState.navController) },
+            bottomBar = { BottomNav(navController = navController) },
         ) { innerPadding ->
             NavHost(
-                navController = appState.navController,
+                navController = navController,
                 startDestination = Screen.Home.route,
                 modifier = modifier
                     .padding(innerPadding)
@@ -40,9 +44,10 @@ fun ValetApp(
                 composable(Screen.ParkingLots.route) {
                     Parking(modifier = modifier)
                 }
-                composable(Screen.Vehicles.route) {
-                    Vehicles(modifier = modifier)
-                }
+                vehiclesGraph(
+                    appState = appState,
+                    modifier = modifier
+                )
                 composable(Screen.Profile.route) {
                     Profile(modifier = modifier)
                 }
@@ -51,6 +56,20 @@ fun ValetApp(
     } else {
         OfflineDialog {
             appState.refreshOnline()
+        }
+    }
+}
+
+fun NavGraphBuilder.vehiclesGraph(appState: ValetAppState, modifier: Modifier) {
+    navigation(startDestination = Screen.Vehicles.route, route = "vehicles_graph") {
+        composable(Screen.Vehicles.route) {
+            Vehicles(
+                onAddNewButtonClicked = { appState.navController.navigate(Screen.NewVehicle.route) },
+                modifier = modifier
+            )
+        }
+        composable(Screen.NewVehicle.route) {
+            NewVehicle(onBackPressed = appState::navigateBack, modifier = modifier)
         }
     }
 }

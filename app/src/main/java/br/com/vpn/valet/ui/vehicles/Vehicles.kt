@@ -8,16 +8,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.vpn.valet.data.Vehicle
-import br.com.vpn.valet.ui.AppBar
+import br.com.vpn.valet.ui.components.AppBar
 import br.com.vpn.valet.ui.components.Button
 import br.com.vpn.valet.ui.home.Title
 
 @Composable
 fun Vehicles(
+    onAddNewButtonClicked: () -> Unit,
     modifier: Modifier
 ) {
     Surface {
@@ -51,7 +51,11 @@ fun Vehicles(
                             VehicleItem(vehicle, modifier)
                         }
                     }
-                    Button(text = "Add new", modifier = modifier, )
+                    Button(
+                        text = "Add new",
+                        modifier = modifier,
+                        onClick = onAddNewButtonClicked
+                    )
                 }
             }
         }
