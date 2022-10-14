@@ -2,46 +2,49 @@ package br.com.vpn.valet.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import br.com.vpn.valet.R
 import br.com.vpn.valet.ui.theme.Primary
-import br.com.vpn.valet.ui.theme.White
 
 @Composable
-fun Home() {
+fun Home(
+    modifier: Modifier
+) {
     Surface(
-        Modifier.fillMaxSize()
+        modifier.fillMaxSize()
     ) {
-        HomeContent()
+        HomeContent(modifier = modifier)
     }
 }
 
 @Composable
 fun HomeContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     Column(
-        modifier = modifier
-            .background(MaterialTheme.colors.primary)
-            .fillMaxWidth()
+        modifier = modifier.background(MaterialTheme.colors.primary)
     ) {
+        Spacer(
+            modifier
+                .background(MaterialTheme.colors.primary)
+                .fillMaxWidth()
+                .windowInsetsTopHeight(WindowInsets.statusBars)
+        )
         HomeAppBar(modifier = modifier)
         Column(
-            modifier = modifier
-                .fillMaxWidth()
+            modifier = modifier.fillMaxSize()
         ) {
             Column(
                 modifier = modifier.padding(24.dp)
@@ -66,7 +69,7 @@ fun HomeAppBar(
                 Row {
                     Image(
                         painter = painterResource(id = R.drawable.valet_logo),
-                        colorFilter = ColorFilter.tint(Color.White),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colors.background),
                         contentDescription = null
                     )
                 }
@@ -81,7 +84,7 @@ fun HomeAppBar(
 fun Map(modifier: Modifier) {
     Box(modifier = modifier
         .fillMaxSize()
-        .background(Color.White))
+        .background(MaterialTheme.colors.background))
 }
 
 @Composable
@@ -92,7 +95,7 @@ fun Title(
     Text(
         text = title,
         style = MaterialTheme.typography.h1,
-        color = Color.White,
+        color = MaterialTheme.colors.background,
         modifier = modifier.widthIn(100.dp, 300.dp)
     )
 }
@@ -108,7 +111,7 @@ fun FindLocationTextField(
         label = { Text(text = "Find a location") },
         shape = RoundedCornerShape(8.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White
+            backgroundColor = MaterialTheme.colors.background
         ),
         trailingIcon = {
             Icon(

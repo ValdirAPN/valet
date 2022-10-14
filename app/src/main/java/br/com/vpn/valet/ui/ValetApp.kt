@@ -1,5 +1,8 @@
 package br.com.vpn.valet.ui
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -18,26 +21,31 @@ import br.com.vpn.valet.ui.vehicles.Vehicles
 
 @Composable
 fun ValetApp(
+    modifier: Modifier,
     appState: ValetAppState = rememberValetAppState()
 ) {
+
     if (appState.isOnline) {
-        Scaffold(bottomBar = { BottomNav(navController = appState.navController) }) { innerPadding ->
+        Scaffold(
+            bottomBar = { BottomNav(navController = appState.navController) },
+        ) { innerPadding ->
             NavHost(
                 navController = appState.navController,
                 startDestination = Screen.Home.route,
-                modifier = Modifier.padding(innerPadding)
+                modifier = modifier
+                    .padding(innerPadding)
             ) {
                 composable(Screen.Home.route) {
-                    Home()
+                    Home(modifier = modifier)
                 }
                 composable(Screen.ParkingLots.route) {
-                    Parking()
+                    Parking(modifier = modifier)
                 }
                 composable(Screen.Vehicles.route) {
-                    Vehicles()
+                    Vehicles(modifier = modifier)
                 }
                 composable(Screen.Profile.route) {
-                    Profile()
+                    Profile(modifier = modifier)
                 }
             }
         }
@@ -58,8 +66,9 @@ fun BottomNav(navController: NavController) {
     )
 
     BottomNavigation(
-        backgroundColor = Color.White,
-        contentColor = Color.Black
+        backgroundColor = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.secondary,
+        modifier = Modifier.padding(bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
     ) {
         val navBackStackTrace by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackTrace?.destination?.route
