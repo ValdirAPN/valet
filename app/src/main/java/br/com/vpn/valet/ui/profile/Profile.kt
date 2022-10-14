@@ -33,7 +33,7 @@ fun Profile(
         Column(
             modifier.padding(24.dp)
         ) {
-            Title(title = "My vehicles", modifier = modifier)
+            Title(title = "My account", modifier = modifier)
             LazyColumn(
                 modifier.padding(top = 16.dp)
             ) {
