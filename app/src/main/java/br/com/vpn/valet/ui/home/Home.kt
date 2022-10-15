@@ -57,15 +57,9 @@ fun HomeContent(
                         .padding(top = 24.dp)
                 )
             }
-//            Map(modifier)
             FindParkingMap()
         }
     }
-}
-
-@Composable
-fun Map(modifier: Modifier) {
-//    FindParkingMap(modifier = modifier.fillMaxSize())
 }
 
 @Composable
