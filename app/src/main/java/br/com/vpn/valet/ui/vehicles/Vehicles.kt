@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.vpn.valet.data.Vehicle
@@ -73,16 +74,24 @@ fun Vehicles(
 @Composable
 private fun VehicleList(
     uiState: VehiclesUiState,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
-    if (uiState.isLoading) {
-        CircularProgressIndicator()
-    }
-    LazyColumn(
-        modifier = modifier
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize()
     ) {
-        items(uiState.vehicles) { vehicle ->
-            VehicleItem(vehicle, modifier)
+        if (uiState.isLoading) {
+            CircularProgressIndicator(
+
+            )
+        }
+        LazyColumn(
+            modifier = modifier
+        ) {
+            items(uiState.vehicles) { vehicle ->
+                VehicleItem(vehicle, modifier)
+            }
         }
     }
 

@@ -39,7 +39,7 @@ fun Parking(
             Column(
                 modifier = modifier.padding(24.dp)
             ) {
-                Title(title = "Active parkings", modifier = modifier)
+                Title(title = "Active parking lots", modifier = modifier)
                 LazyColumn(
                     modifier.padding(top = 16.dp)
                 ) {
