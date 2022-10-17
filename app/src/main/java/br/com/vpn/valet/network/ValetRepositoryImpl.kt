@@ -7,4 +7,7 @@ class ValetRepositoryImpl(
 ) : ValetRepository {
     override suspend fun getVehicles(): List<Vehicle> =
         network.getVehicles()
+
+    override suspend fun addVehicle(vehicle: Vehicle): Vehicle =
+        network.addVehicle(vehicle)
 }

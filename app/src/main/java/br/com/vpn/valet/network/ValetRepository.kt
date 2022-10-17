@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ValetRepository {
     suspend fun getVehicles(): List<Vehicle>
+    suspend fun addVehicle(vehicle: Vehicle): Vehicle
 }

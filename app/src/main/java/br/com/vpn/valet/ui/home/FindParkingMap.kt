@@ -27,6 +27,9 @@ fun FindParkingMap() {
 
     GoogleMap(
         cameraPositionState = cameraPositionState,
+        uiSettings = MapUiSettings(
+            zoomControlsEnabled = false
+        ),
         properties = MapProperties(
             mapStyleOptions = MapStyleOptions.loadRawResourceStyle(LocalContext.current, R.raw.map_style)
         )

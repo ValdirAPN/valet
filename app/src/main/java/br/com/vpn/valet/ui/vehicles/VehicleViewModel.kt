@@ -37,6 +37,11 @@ class VehicleViewModel() : ViewModel(){
             viewModelState.value.toUiState()
         )
 
+    fun addVehicle(vehicle: Vehicle) {
+        viewModelScope.launch {
+            valetRepository.addVehicle(vehicle)
+        }
+    }
 
     init {
         viewModelScope.launch {

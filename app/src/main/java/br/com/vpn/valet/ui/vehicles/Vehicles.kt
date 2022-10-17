@@ -1,6 +1,5 @@
 package br.com.vpn.valet.ui.vehicles
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,7 +29,7 @@ fun Vehicles(
     Scaffold(
         floatingActionButton = {
             androidx.compose.material.Button(
-                onClick = { /*TODO*/ },
+                onClick = onAddNewButtonClicked,
                 modifier = modifier.size(60.dp),
                 shape = RoundedCornerShape(60.dp)
             ) {
@@ -70,7 +69,6 @@ fun Vehicles(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun VehicleList(
     uiState: VehiclesUiState,
