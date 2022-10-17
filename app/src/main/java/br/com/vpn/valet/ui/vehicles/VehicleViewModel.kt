@@ -37,9 +37,9 @@ class VehicleViewModel() : ViewModel(){
             viewModelState.value.toUiState()
         )
 
-    fun addVehicle(vehicle: Vehicle) {
+    fun deleteVehicle(id: String) {
         viewModelScope.launch {
-            valetRepository.addVehicle(vehicle)
+            valetRepository.deleteVehicle(id)
         }
     }
 

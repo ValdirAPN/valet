@@ -4,10 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,44 +26,30 @@ fun Vehicles(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Scaffold(
-        floatingActionButton = {
-            androidx.compose.material.Button(
-                onClick = onAddNewButtonClicked,
-                modifier = modifier.size(60.dp),
-                shape = RoundedCornerShape(60.dp)
-            ) {
-                Icon(Icons.Default.Add, "Add")
-            }
-        }
-    ) { innerPadding ->
-        Surface(
-            modifier = modifier.padding(innerPadding)
+    Surface() {
+        Column(
+            modifier
+                .background(MaterialTheme.colors.background)
         ) {
-            Column(
-                modifier
+            Spacer(
+                modifier = modifier
                     .background(MaterialTheme.colors.background)
-            ) {
-                Spacer(
-                    modifier = modifier
-                        .background(MaterialTheme.colors.background)
-                        .fillMaxWidth()
-                        .windowInsetsTopHeight(WindowInsets.statusBars)
-                )
-                AppBar(modifier = modifier)
+                    .fillMaxWidth()
+                    .windowInsetsTopHeight(WindowInsets.statusBars)
+            )
+            AppBar(modifier = modifier)
 
-                Column(
-                    modifier = modifier
-                        .padding(
-                            top = 24.dp,
-                            start = 24.dp,
-                            end = 24.dp,
-                            bottom = 0.dp
-                        ),
-                ) {
-                    Title(title = "My vehicles", modifier = modifier)
-                    VehicleList(uiState, modifier)
-                }
+            Column(
+                modifier = modifier
+                    .padding(
+                        top = 24.dp,
+                        start = 24.dp,
+                        end = 24.dp,
+                        bottom = 0.dp
+                    ),
+            ) {
+                Title(title = "My vehicles", modifier = modifier)
+                VehicleList(uiState, viewModel, modifier, onAddNewButtonClicked)
             }
         }
     }
@@ -72,44 +58,83 @@ fun Vehicles(
 @Composable
 private fun VehicleList(
     uiState: VehiclesUiState,
+    viewModel: VehicleViewModel,
     modifier: Modifier,
+    onAddNewButtonClicked: () -> Unit
 ) {
     Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxSize()
     ) {
         if (uiState.isLoading) {
-            CircularProgressIndicator(
-
-            )
+            Column(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
         LazyColumn(
-            modifier = modifier
+            modifier = modifier.fillMaxWidth()
         ) {
             items(uiState.vehicles) { vehicle ->
-                VehicleItem(vehicle, modifier)
+                VehicleItem(vehicle, modifier) {
+                    vehicle.id?.let(viewModel::deleteVehicle)
+                }
+
+                if (vehicle == uiState.vehicles.last())
+                    br.com.vpn.valet.ui.components.Button(
+                        text = "Add new vehicle",
+                        modifier = modifier,
+                        icon = { Icon(Icons.Default.Add, "Add") }
+                    ) {
+                        onAddNewButtonClicked()
+                    }
+                else
+                    Box(
+                        modifier
+                            .fillMaxWidth()
+                            .height(0.4.dp)
+                            .background(MaterialTheme.colors.secondaryVariant)
+                    )
             }
         }
     }
 
 }
 
+
 @Composable
-fun VehicleItem(vehicle: Vehicle, modifier: Modifier) {
+fun VehicleItem(
+    vehicle: Vehicle,
+    modifier: Modifier,
+    onDelete: () -> Unit,
+) {
     Column() {
-        Column(
-            modifier = modifier.padding(vertical = 16.dp)
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = vehicle.model, style = MaterialTheme.typography.h3)
-            Text(text = vehicle.license, color = MaterialTheme.colors.secondaryVariant)
-            Text(text = vehicle.color ?: "", color = MaterialTheme.colors.secondaryVariant)
+            Column(
+                modifier = modifier.padding(vertical = 16.dp)
+            ) {
+                Text(text = vehicle.model, style = MaterialTheme.typography.h3)
+                Text(text = vehicle.license, color = MaterialTheme.colors.secondaryVariant)
+                Text(text = vehicle.color ?: "Color not specified", color = MaterialTheme.colors.secondaryVariant)
+            }
+
+            IconButton(
+                onClick = onDelete
+            ) {
+                Icon(
+                    Icons.Outlined.Delete,
+                    contentDescription = "Delete",
+                    tint = MaterialTheme.colors.error,
+                    modifier = modifier
+                        .padding(4.dp)
+                )
+            }
         }
-        Box(
-            modifier
-                .fillMaxWidth()
-                .height(0.4.dp)
-                .background(MaterialTheme.colors.secondaryVariant)
-        )
     }
 }

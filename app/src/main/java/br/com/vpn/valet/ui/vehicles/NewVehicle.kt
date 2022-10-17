@@ -76,7 +76,11 @@ fun NewVehicle(
                 )
             }
             Button(text = "Add", modifier = modifier) {
-                val vehicle = Vehicle(brand.uppercase(), model, license, "", false)
+                val vehicle = Vehicle(
+                    brand = brand.uppercase(),
+                    model = model,
+                    license = license,
+                    color = "")
                 viewModel.addVehicle(vehicle)
                 onBackPressed()
             }

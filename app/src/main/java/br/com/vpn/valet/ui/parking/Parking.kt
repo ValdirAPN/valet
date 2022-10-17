@@ -27,7 +27,7 @@ fun Parking(
                 .background(MaterialTheme.colors.background)
         ) {
             val vehicles = listOf<Vehicle>(
-                Vehicle("VOLKSWAGEN", "Fox", "MYW-7270", "Vermelho", true)
+                Vehicle("","VOLKSWAGEN", "Fox", "MYW-7270", "Vermelho", true)
             )
             Spacer(
                 modifier = modifier

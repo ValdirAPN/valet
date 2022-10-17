@@ -8,18 +8,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-
-private interface ValetNetworkApi {
-
-    @GET(value = "cars")
-    suspend fun getVehicles() : List<Vehicle>
-
-    @POST(value = "cars")
-    suspend fun addVehicle(@Body vehicle: Vehicle) : Vehicle
-}
 
 class BasicAuthInterceptor(
     username: String,
@@ -64,4 +52,8 @@ class RetrofitNetwork : ValetNetworkDataSource {
 
     override suspend fun addVehicle(vehicle: Vehicle): Vehicle =
         networkApi.addVehicle(vehicle)
+
+    override suspend fun deleteVehicle(id: String) {
+        networkApi.deleteVehicle(id)
+    }
 }

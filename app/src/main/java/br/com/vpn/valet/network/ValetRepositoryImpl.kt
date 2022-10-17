@@ -10,4 +10,8 @@ class ValetRepositoryImpl(
 
     override suspend fun addVehicle(vehicle: Vehicle): Vehicle =
         network.addVehicle(vehicle)
+
+    override suspend fun deleteVehicle(id: String) {
+        network.deleteVehicle(id)
+    }
 }
